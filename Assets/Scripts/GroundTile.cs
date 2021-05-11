@@ -47,6 +47,7 @@ public class GroundTile : MonoBehaviour
         mesh.vertices = verts.Select(a => transform.InverseTransformPoint(a)).ToArray();
         mesh.triangles = clockWise ? new int[] { 0, 1, 2} : new int[] { 2, 1, 0 };
         mesh.uv = new Vector2[] { new Vector2(0, 0), new Vector2(0, 1), new Vector2(1, 1) };
+        mesh.RecalculateNormals();
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
         GetComponent<MeshRenderer>().material = mat;

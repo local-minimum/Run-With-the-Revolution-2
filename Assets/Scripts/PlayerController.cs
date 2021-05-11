@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField, Range(0, 1000)] float lateralForce = 500;
-    [SerializeField, Range(0, 1000)] float acceleartionForce = 200;
+    [SerializeField, Range(0, 10)] float lateralAcceleration = 2;
+    [SerializeField, Range(0, 30)] float forwardAcceleration = 5;
 
     GroundBuilder builder;
     Rigidbody rb;
@@ -29,7 +29,6 @@ public class PlayerController : MonoBehaviour
 
     private void Builder_OnCompleted(GroundBuilder builder)
     {
-        rb.useGravity = true;
         alive = true;
     }
 
@@ -39,12 +38,11 @@ public class PlayerController : MonoBehaviour
         Vector3 forward = Origo.GetForwardVector(builder.Radius, a);
         transform.rotation = Quaternion.LookRotation(forward, Origo.GetUpwardsVector(transform.position));
         if (!alive) return;        
-        rb.AddForce(Input.GetAxis("Horizontal") * lateralForce * -1 * Vector3.forward);
+        rb.AddForce(Input.GetAxis("Horizontal") * lateralAcceleration * -1 * Vector3.forward, ForceMode.Acceleration);
         float acceleration = Input.GetAxis("Vertical");
         if (acceleration > 0)
         {
-            rb.useGravity = false;
-            rb.AddForce(acceleration * acceleartionForce * Origo.GetForwardVector(builder.Radius, a));
+            rb.AddForce(acceleration * forwardAcceleration * Origo.GetForwardVector(builder.Radius, a), ForceMode.Acceleration);
         }
     }
 }

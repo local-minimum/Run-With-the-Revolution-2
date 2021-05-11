@@ -46,4 +46,14 @@ public class Origo : MonoBehaviour
     {
         return (instance.transform.position - pos).normalized;
     }
+
+    public static Vector3 GetOutwardsVector(float angle)
+    {
+        return new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+    }
+
+    public static Vector3 Position
+    {
+        get { return instance.transform.position; }
+    }
 }
