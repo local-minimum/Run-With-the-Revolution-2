@@ -13,7 +13,9 @@ public class GroundBuilder : MonoBehaviour
     [SerializeField, Range(0, 2)] float arcDistanceRatio = 0.2f;
     [SerializeField, Range(0, 1)] float tileBuildTime = 0.2f;
     [SerializeField] Material ground;
-    [SerializeField, Range(0, 4)] float noise = 0.25f;
+    [SerializeField, Range(0, 100)] float noise = 0.25f;
+    [SerializeField, Range(0, 4)] float lateralNoiseScale = 0.2f;
+
     List<GroundTile> tiles = new List<GroundTile>();
 
     public float Radius
@@ -27,7 +29,7 @@ public class GroundBuilder : MonoBehaviour
     }
 
     IEnumerator<WaitForSeconds> Build()
-    {
+    {        
         int nTiles = Mathf.FloorToInt(2 * Mathf.PI * radius / (width * arcDistanceRatio));
         if (nTiles % 2 == 1) nTiles++;
         float aStep = 2 * Mathf.PI / nTiles;
@@ -35,15 +37,16 @@ public class GroundBuilder : MonoBehaviour
         GroundTile prev = null;
         for (int idTile=0; idTile<nTiles; idTile++)
         {
-            Vector3 depthOffset = Vector3.forward * (idTile % 2 == 0 ? -1 : 1) * halfWidth;
+            float depth = (idTile % 2 == 0 ? -1 : 1);
+            Vector3 depthOffset = Vector3.forward * depth * halfWidth;
             Vector3 firstVert;
             Vector3 secondVert;
             Vector3 thirdVert;
             if (idTile == 0)
             {
-                firstVert = Origo.GetPoint(radius + Random.Range(-noise, noise), aStep * -1f) - depthOffset;
-                secondVert = Origo.GetPoint(radius + Random.Range(-noise, noise), aStep * idTile) + depthOffset;
-                thirdVert = Origo.GetPoint(radius + Random.Range(-noise, noise), aStep * (idTile + 1f)) - depthOffset;
+                firstVert = Origo.GetPoint(radius + GetNoise(-depth, aStep * -1f), aStep * -1f) - depthOffset;
+                secondVert = Origo.GetPoint(radius + GetNoise(depth, aStep * idTile), aStep * idTile) + depthOffset;
+                thirdVert = Origo.GetPoint(radius + GetNoise(-depth, aStep * (idTile + 1f)), aStep * (idTile + 1f)) - depthOffset;
             } 
             else
             {
@@ -58,7 +61,7 @@ public class GroundBuilder : MonoBehaviour
                 }
                 else
                 {
-                    thirdVert = Origo.GetPoint(radius + Random.Range(-noise, noise), aStep * (idTile + 1f)) - depthOffset;
+                    thirdVert = Origo.GetPoint(radius + GetNoise(-depth, aStep * (idTile + 1f)), aStep * (idTile + 1f)) - depthOffset;
                 }                
             }
 
@@ -69,6 +72,16 @@ public class GroundBuilder : MonoBehaviour
         tiles[0].negNeighbour = prev;
 
         OnCompleted?.Invoke(this);
+    }
+
+    float GetNoise()
+    {
+        return Random.Range(-noise, noise);
+    }
+
+    float GetNoise(float lateral, float along) 
+    {
+        return Mathf.PerlinNoise(along, lateral * lateralNoiseScale) * noise;
     }
 
     GroundTile SpawnAt(int id, Vector3[] verts, GroundTile prev)

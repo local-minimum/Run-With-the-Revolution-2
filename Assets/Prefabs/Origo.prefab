@@ -198,4 +198,5 @@ MonoBehaviour:
   arcDistanceRatio: 0.15
   tileBuildTime: 0.02
   ground: {fileID: 2100000, guid: d72f69daf81e720408b6f26415a79d23, type: 2}
-  noise: 0.1
+  noise: 10
+  lateralNoiseScale: 0.2

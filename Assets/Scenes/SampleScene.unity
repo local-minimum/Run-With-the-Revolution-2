@@ -183,6 +183,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Origo
       objectReference: {fileID: 0}
+    - target: {fileID: 5245659002738672961, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
+      propertyPath: lateralNoiseScale
+      value: 0.2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
 --- !u!1001 &7874208123450054519
