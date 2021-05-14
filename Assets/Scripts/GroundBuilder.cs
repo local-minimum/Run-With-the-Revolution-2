@@ -8,6 +8,7 @@ public class GroundBuilder : MonoBehaviour
 {
     public event GroundBuiltEvent OnCompleted;
 
+    [SerializeField] GroundBuilder upstreamGB;
     [SerializeField, Range(5, 100)] float radius;
     [SerializeField, Range(0, 5)] float width;
     [SerializeField, Range(0, 2)] float arcDistanceRatio = 0.2f;
@@ -28,25 +29,57 @@ public class GroundBuilder : MonoBehaviour
         StartCoroutine(Build());
     }
 
+    private float Width
+    {
+        get
+        {
+            return upstreamGB == null ?
+                width :
+                2 * (Mathf.Abs(upstreamGB.transform.position.z - transform.position.z) - upstreamGB.width / 2);
+        }
+    }
+
+    private float NoiseDepthOffset
+    {
+        get
+        {
+            return  upstreamGB != null ? upstreamGB.NoiseDepthOffset + upstreamGB.lateralNoiseScale + lateralNoiseScale : 0;
+        }
+    }
+
+    private int DepthDirection
+    {
+        get
+        {
+            return upstreamGB == null ? 0 : (upstreamGB.DepthDirection + 1 % 2);
+        }
+    }
+
     IEnumerator<WaitForSeconds> Build()
-    {        
-        int nTiles = Mathf.FloorToInt(2 * Mathf.PI * radius / (width * arcDistanceRatio));
+    {
+        float zOffset = Origo.ZOffset(transform);
+        float noiseDepthOffset = NoiseDepthOffset;
+        float depthDirection = DepthDirection;
+        bool invertVertsOrder = depthDirection == 1;
+        float myWidth = Width;
+        int nTiles = Mathf.FloorToInt(2 * Mathf.PI * radius / (myWidth * arcDistanceRatio));
         if (nTiles % 2 == 1) nTiles++;
         float aStep = 2 * Mathf.PI / nTiles;
-        float halfWidth = width * 0.5f;
+        float halfWidth = myWidth * 0.5f;
         GroundTile prev = null;
         for (int idTile=0; idTile<nTiles; idTile++)
         {
-            float depth = (idTile % 2 == 0 ? -1 : 1);
+            float depth = (idTile % 2 == depthDirection ? -1 : 1);
             Vector3 depthOffset = Vector3.forward * depth * halfWidth;
+            float noiseDepth = depth * lateralNoiseScale;
             Vector3 firstVert;
             Vector3 secondVert;
             Vector3 thirdVert;
             if (idTile == 0)
             {
-                firstVert = Origo.GetPoint(radius + GetNoise(-depth, aStep * -1f), aStep * -1f) - depthOffset;
-                secondVert = Origo.GetPoint(radius + GetNoise(depth, aStep * idTile), aStep * idTile) + depthOffset;
-                thirdVert = Origo.GetPoint(radius + GetNoise(-depth, aStep * (idTile + 1f)), aStep * (idTile + 1f)) - depthOffset;
+                firstVert = Origo.GetPoint(radius + GetNoise(-noiseDepth + noiseDepthOffset, aStep * -1f), aStep * -1f, zOffset) - depthOffset;
+                secondVert = Origo.GetPoint(radius + GetNoise(noiseDepth + noiseDepthOffset, aStep * idTile), aStep * idTile, zOffset) + depthOffset;
+                thirdVert = Origo.GetPoint(radius + GetNoise(-noiseDepth + noiseDepthOffset, aStep * (idTile + 1f)), aStep * (idTile + 1f), zOffset) - depthOffset;
             } 
             else
             {
@@ -61,11 +94,11 @@ public class GroundBuilder : MonoBehaviour
                 }
                 else
                 {
-                    thirdVert = Origo.GetPoint(radius + GetNoise(-depth, aStep * (idTile + 1f)), aStep * (idTile + 1f)) - depthOffset;
+                    thirdVert = Origo.GetPoint(radius + GetNoise(-noiseDepth + noiseDepthOffset, aStep * (idTile + 1f)), aStep * (idTile + 1f), zOffset) - depthOffset;
                 }                
             }
 
-            prev = SpawnAt(idTile, new Vector3[] { firstVert, secondVert, thirdVert }, prev);
+            prev = SpawnAt(idTile, new Vector3[] { firstVert, secondVert, thirdVert }, prev, invertVertsOrder);
             tiles.Add(prev);
             yield return new WaitForSeconds(tileBuildTime);
         }
@@ -81,15 +114,15 @@ public class GroundBuilder : MonoBehaviour
 
     float GetNoise(float lateral, float along) 
     {
-        return Mathf.PerlinNoise(along, lateral * lateralNoiseScale) * noise;
+        return Mathf.PerlinNoise(along, lateral) * noise;
     }
 
-    GroundTile SpawnAt(int id, Vector3[] verts, GroundTile prev)
+    GroundTile SpawnAt(int id, Vector3[] verts, GroundTile prev, bool invertOrder)
     {
         var tile = Instantiate(groundTilePrefab, transform);
         tile.name = string.Format("Tile {0}", id);
         tile.gameObject.layer = LayerMask.NameToLayer("Ground");
-        tile.SetVerts(verts, id % 2 == 1);
+        tile.SetVerts(verts, (id % 2 == 1) != invertOrder);
         tile.negNeighbour = prev;
         return tile;
     }

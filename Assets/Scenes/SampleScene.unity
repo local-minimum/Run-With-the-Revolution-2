@@ -123,11 +123,231 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &78714720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 78714721}
+  - component: {fileID: 78714722}
+  m_Layer: 0
+  m_Name: Ground Tier 1 - Ring 2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &78714721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78714720}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 750076329}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &78714722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 78714720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf15413edd23b984a84b1fcc58464f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upstreamGB: {fileID: 1506665664}
+  radius: 5
+  width: 0
+  arcDistanceRatio: 0.15
+  tileBuildTime: 0.02
+  groundTilePrefab: {fileID: 7810707524277730467, guid: 03bc3a05986eff345a3c93b5849cee9e, type: 3}
+  noise: 10
+  lateralNoiseScale: 3.54
+--- !u!1 &295336669
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 295336670}
+  - component: {fileID: 295336671}
+  m_Layer: 0
+  m_Name: Ground Tier 1 - Ring 5
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &295336670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295336669}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 6}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 750076329}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &295336671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295336669}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf15413edd23b984a84b1fcc58464f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upstreamGB: {fileID: 480360260}
+  radius: 5
+  width: 0
+  arcDistanceRatio: 0.15
+  tileBuildTime: 0.02
+  groundTilePrefab: {fileID: 7810707524277730467, guid: 03bc3a05986eff345a3c93b5849cee9e, type: 3}
+  noise: 10
+  lateralNoiseScale: 3.54
+--- !u!1 &480360258
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 480360259}
+  - component: {fileID: 480360260}
+  m_Layer: 0
+  m_Name: Ground Tier 1 - Ring 4
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &480360259
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480360258}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 750076329}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &480360260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480360258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf15413edd23b984a84b1fcc58464f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upstreamGB: {fileID: 912539657}
+  radius: 5
+  width: 0
+  arcDistanceRatio: 0.15
+  tileBuildTime: 0.02
+  groundTilePrefab: {fileID: 7810707524277730467, guid: 03bc3a05986eff345a3c93b5849cee9e, type: 3}
+  noise: 10
+  lateralNoiseScale: 3.54
 --- !u!108 &705507994 stripped
 Light:
   m_CorrespondingSourceObject: {fileID: 705507994, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
   m_PrefabInstance: {fileID: 5245659002624787378}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &750076329 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5245659001837214732, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
+  m_PrefabInstance: {fileID: 5245659002624787378}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &912539656
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 912539658}
+  - component: {fileID: 912539657}
+  m_Layer: 0
+  m_Name: Ground Tier 1 - Ring 3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &912539657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912539656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf15413edd23b984a84b1fcc58464f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  upstreamGB: {fileID: 78714722}
+  radius: 5
+  width: 0
+  arcDistanceRatio: 0.15
+  tileBuildTime: 0.02
+  groundTilePrefab: {fileID: 7810707524277730467, guid: 03bc3a05986eff345a3c93b5849cee9e, type: 3}
+  noise: 10
+  lateralNoiseScale: 3.54
+--- !u!4 &912539658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 912539656}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 750076329}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1506665664 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5245659002738672961, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
+  m_PrefabInstance: {fileID: 5245659002624787378}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cf15413edd23b984a84b1fcc58464f1e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5245659002624787378
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -182,6 +402,14 @@ PrefabInstance:
     - target: {fileID: 5245659001837214735, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
       propertyPath: m_Name
       value: Origo
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245659002738672960, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5245659002738672961, guid: c801827ed5865ed4497f476b74fbc199, type: 3}
+      propertyPath: lateralNoiseScale
+      value: 3.54
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c801827ed5865ed4497f476b74fbc199, type: 3}

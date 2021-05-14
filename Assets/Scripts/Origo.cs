@@ -24,16 +24,16 @@ public class Origo : MonoBehaviour
             instance = null;
         }
     }
-
-    public static Vector3 GetPoint(float radius, float angle)
+    
+    public static Vector3 GetPoint(float radius, float angle, float zOffset)
     {
         var origin = instance.transform.position;
-        return origin + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0);
+        return origin + radius * new Vector3(Mathf.Cos(angle), Mathf.Sin(angle)) + Vector3.forward * zOffset;
     }
 
     public static Vector3 GetForwardVector(float radius, float angle, float lookAhead = Mathf.PI / 10f)
     {
-        return (GetPoint(radius, angle + lookAhead) - GetPoint(radius, angle)).normalized;
+        return (GetPoint(radius, angle + lookAhead, 0) - GetPoint(radius, angle, 0)).normalized;
     }
 
     public static float GetAngle(Vector3 position)
@@ -55,5 +55,10 @@ public class Origo : MonoBehaviour
     public static Vector3 Position
     {
         get { return instance.transform.position; }
+    }
+
+    public static float ZOffset(Transform other)
+    {
+        return other.position.z - Position.z;
     }
 }
