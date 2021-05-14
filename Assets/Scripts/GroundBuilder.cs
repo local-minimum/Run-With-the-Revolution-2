@@ -12,7 +12,7 @@ public class GroundBuilder : MonoBehaviour
     [SerializeField, Range(0, 5)] float width;
     [SerializeField, Range(0, 2)] float arcDistanceRatio = 0.2f;
     [SerializeField, Range(0, 1)] float tileBuildTime = 0.2f;
-    [SerializeField] Material ground;
+    [SerializeField] GroundTile groundTilePrefab;
     [SerializeField, Range(0, 100)] float noise = 0.25f;
     [SerializeField, Range(0, 4)] float lateralNoiseScale = 0.2f;
 
@@ -86,10 +86,10 @@ public class GroundBuilder : MonoBehaviour
 
     GroundTile SpawnAt(int id, Vector3[] verts, GroundTile prev)
     {
-        var tileGO = new GameObject(string.Format("Tile {0}", id), typeof(GroundTile));
-        tileGO.transform.SetParent(transform);
-        var tile = tileGO.GetComponent<GroundTile>();
-        tile.SetVerts(verts, id % 2 == 1, ground);
+        var tile = Instantiate(groundTilePrefab, transform);
+        tile.name = string.Format("Tile {0}", id);
+        tile.gameObject.layer = LayerMask.NameToLayer("Ground");
+        tile.SetVerts(verts, id % 2 == 1);
         tile.negNeighbour = prev;
         return tile;
     }

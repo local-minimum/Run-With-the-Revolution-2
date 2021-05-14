@@ -197,6 +197,6 @@ MonoBehaviour:
   width: 3
   arcDistanceRatio: 0.15
   tileBuildTime: 0.02
-  ground: {fileID: 2100000, guid: d72f69daf81e720408b6f26415a79d23, type: 2}
+  groundTilePrefab: {fileID: 7810707524277730467, guid: 03bc3a05986eff345a3c93b5849cee9e, type: 3}
   noise: 10
   lateralNoiseScale: 0.2

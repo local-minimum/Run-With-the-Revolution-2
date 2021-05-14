@@ -31,16 +31,15 @@ public class GroundTile : MonoBehaviour
         get { return _verts; }
     }
 
-    public void SetVerts(Vector3[] verts, bool clockWise, Material mat)
+    public void SetVerts(Vector3[] verts, bool clockWise)
     {
         _verts = verts;
         this.clockWise = clockWise;
         transform.position = verts.Aggregate((a, b) => a + b) / verts.Length;
-        MakeGround(mat);
-        
+        MakeGround();        
     }
 
-    void MakeGround(Material mat)
+    void MakeGround()
     {
         var mesh = new Mesh();
         mesh.name = string.Format("{0} mesh", name);
@@ -50,6 +49,5 @@ public class GroundTile : MonoBehaviour
         mesh.RecalculateNormals();
         GetComponent<MeshFilter>().mesh = mesh;
         GetComponent<MeshCollider>().sharedMesh = mesh;
-        GetComponent<MeshRenderer>().material = mat;
     }
 }
